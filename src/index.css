@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'SFGeorgian';
+    src: url('./assets/fonts/SF-Georgian-Rounded.ttf') format('ttf');
+}
+
+* {
+    font-family: 'SFGeorgian';
+}
