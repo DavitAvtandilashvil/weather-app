@@ -2,6 +2,7 @@ import React from "react";
 import sunIcon from "../assets/icons/filled-sun.svg";
 import SingleDayWeatherComponent from "./SingleDayWeatherComponent";
 import ButtonComp from "./ButtonComp";
+import calendarIcon from "../assets/icons/calendar-icon.svg";
 
 const testArray = [
   {
@@ -58,6 +59,14 @@ const testArray = [
 const WeekWeatherWidget = () => {
   return (
     <div className="w-[492px] flex flex-col gap-[28px] items-center">
+      {/* widget title and calendar */}
+      <div className="w-full flex items-center justify-between">
+        <h2 className="text-[24px] leading-[28px] font-[500]">
+          კვირის ამინდი{" "}
+        </h2>
+        <img src={calendarIcon} className="cursor-pointer" />
+      </div>
+
       {/* weather grid */}
       <div className="grid grid-cols-3 gap-[18px]">
         {testArray.map((item, index) => {
