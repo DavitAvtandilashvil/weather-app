@@ -1,6 +1,7 @@
 import React from 'react';
 import DailyWeather from '../components/DailyWeather';
 import HourlyWeather from '../components/HourlyWeather';
+import WeekWeatherWidget from '../components/WeekWeatherWidget';
 
 const Home = () => {
   return (
@@ -10,6 +11,8 @@ const Home = () => {
     >
       <DailyWeather />
       <HourlyWeather />
+
+      <WeekWeatherWidget />
     </div>
   );
 };

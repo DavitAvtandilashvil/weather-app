@@ -21,14 +21,14 @@ const SingleDayWeatherComponent = ({
       </div>
 
       {/* weather icon */}
-      <img src={sunIcon} className="w-[40px]" />
+      <img src={tempIcon} className="w-[40px]" />
 
       {/* temperatures */}
       <div className="flex gap-[12px] items-center">
         {/* day temp */}
         <div className="flex flex-col items-center">
           <p className="text-[28px] leading-[33px]">{dayTemp}&deg;</p>
-          <img src={tempIcon} />
+          <img src={dayTempIcon} />
         </div>
 
         {/* divider */}
