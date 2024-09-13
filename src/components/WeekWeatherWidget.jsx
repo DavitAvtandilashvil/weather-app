@@ -1,6 +1,7 @@
 import React from "react";
 import sunIcon from "../assets/icons/filled-sun.svg";
 import SingleDayWeatherComponent from "./SingleDayWeatherComponent";
+import ButtonComp from "./ButtonComp";
 
 const testArray = [
   {
@@ -56,22 +57,25 @@ const testArray = [
 
 const WeekWeatherWidget = () => {
   return (
-    <div className="w-[492px]">
-
+    <div className="w-[492px] flex flex-col gap-[28px] items-center">
+      {/* weather grid */}
       <div className="grid grid-cols-3 gap-[18px]">
         {testArray.map((item, index) => {
-          return <SingleDayWeatherComponent
-                    key={index}
-                    date={item.date}
-                    dayName={item.dayName}
-                    dayTemp={item.dayTemp}
-                    nightTemp={item.nightTemp}
-                    tempIcon={item.tempIcon}
-                 />;
+          return (
+            <SingleDayWeatherComponent
+              key={index}
+              date={item.date}
+              dayName={item.dayName}
+              dayTemp={item.dayTemp}
+              nightTemp={item.nightTemp}
+              tempIcon={item.tempIcon}
+            />
+          );
         })}
       </div>
 
-      <button></button>
+      {/* load more btn */}
+      <ButtonComp text="1 თვის პროგნოზი" />
     </div>
   );
 };
