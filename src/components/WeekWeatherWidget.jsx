@@ -67,7 +67,7 @@ const WeekWeatherWidget = () => {
         </h2>
 
         <div className="relative">
-          <span className="">
+          <span className="absolute">
             <Calendar />
           </span>
           <img src={calendarIcon} className="cursor-pointer" />
