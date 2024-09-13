@@ -61,8 +61,8 @@ const WeekWeatherWidget = () => {
     <div className="w-[492px] flex flex-col gap-[28px] items-center">
       {/* widget title and calendar */}
       <div className="w-full flex items-center justify-between">
-        <h2 className="text-[24px] leading-[28px] font-[500]">
-          კვირის ამინდი{" "}
+        <h2 className="text-[24px] leading-[28px] font-[500] text-[#ffffff]">
+          კვირის ამინდი
         </h2>
         <img src={calendarIcon} className="cursor-pointer" />
       </div>

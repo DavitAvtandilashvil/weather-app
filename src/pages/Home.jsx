@@ -6,11 +6,13 @@ import WeekWeatherWidget from '../components/WeekWeatherWidget';
 const Home = () => {
   return (
     <div
-      className="px-16 bg-cover bg-no-repeat h-screen"
+      className="px-[16px] bg-cover bg-no-repeat min-h-screen flex gap-[80px]"
       
     >
+      <div>
       <DailyWeather />
       <HourlyWeather />
+    </div>
 
       <WeekWeatherWidget />
     </div>
