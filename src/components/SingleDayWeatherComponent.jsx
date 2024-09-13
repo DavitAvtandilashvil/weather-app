@@ -14,9 +14,9 @@ const SingleDayWeatherComponent = ({
     <div className="w-[152px] h-[184px] rounded-[12px] px-[8px] pt-[20px] pb-[14px] flex flex-col gap-[10px] bg-[#B3B3B366] text-white items-center">
       {/* day name and date */}
       <div className="flex flex-col gap-[5px]">
-        <p className="leading-[19px] text-center">14 სექტემბერი</p>
+        <p className="leading-[19px] text-center">{date}</p>
         <p className="text-[12px] leading-[14px] text-lightGrey text-center">
-          ორშაბათი
+          {dayName}
         </p>
       </div>
 
@@ -27,8 +27,8 @@ const SingleDayWeatherComponent = ({
       <div className="flex gap-[12px] items-center">
         {/* day temp */}
         <div className="flex flex-col items-center">
-          <p className="text-[28px] leading-[33px]">31&deg;</p>
-          <img src={dayTempIcon} />
+          <p className="text-[28px] leading-[33px]">{dayTemp}&deg;</p>
+          <img src={tempIcon} />
         </div>
 
         {/* divider */}
@@ -36,7 +36,7 @@ const SingleDayWeatherComponent = ({
 
         {/* night temp */}
         <div className="flex flex-col items-center">
-          <p className="text-[28px] leading-[33px]">31&deg;</p>
+          <p className="text-[28px] leading-[33px]">{nightTemp}&deg;</p>
           <img src={nightTempIcon} />
         </div>
       </div>
