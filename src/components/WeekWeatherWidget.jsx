@@ -3,6 +3,7 @@ import sunIcon from "../assets/icons/filled-sun.svg";
 import SingleDayWeatherComponent from "./SingleDayWeatherComponent";
 import ButtonComp from "./ButtonComp";
 import calendarIcon from "../assets/icons/calendar-icon.svg";
+import Calendar from "./Calendar";
 
 const testArray = [
   {
@@ -64,7 +65,13 @@ const WeekWeatherWidget = () => {
         <h2 className="text-[24px] leading-[28px] font-[500] text-[#ffffff]">
           კვირის ამინდი
         </h2>
-        <img src={calendarIcon} className="cursor-pointer" />
+
+        <div className="relative">
+          <span className="">
+            <Calendar />
+          </span>
+          <img src={calendarIcon} className="cursor-pointer" />
+        </div>
       </div>
 
       {/* weather grid */}

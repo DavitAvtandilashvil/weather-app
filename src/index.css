@@ -3,10 +3,82 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'SFGeorgian';
-    src: url('./assets/fonts/SF-Georgian-Rounded.ttf') format('ttf');
+  font-family: "SFGeorgian";
+  src: url("./assets/fonts/SF-Georgian-Rounded.ttf") format("ttf");
 }
 
 * {
-    font-family: 'SFGeorgian';
+  font-family: "SFGeorgian";
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: "Poppins";
+}
+
+.custom-date-picker {
+  width: 30px !important;
+  height: 28px !important;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.react-datepicker {
+  width: 492px !important;
+  height: 534px !important;
+  right: 0 !important;
+  position: absolute !important;
+}
+
+.react-datepicker__day,
+.react-datepicker__time-list-item {
+  font-size: 16px;
+}
+
+/* დღის კუბიკი */
+.react-datepicker__day {
+  width: 50px;
+  height: 50px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-datepicker__day:hover {
+  border-radius: 50%;
+  background-color: #d7d7d7;
+}
+
+/* არჩეული დღე */
+.react-datepicker__day--selected {
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
+
+/* დღის სახელი */
+.react-datepicker__day-name {
+  width: 50px;
+}
+
+/* კვირის row */
+.react-datepicker__week {
+  display: flex;
+  gap: 10px;
+}
+
+/* თვის სახელი */
+.react-datepicker__current-month {
 }
