@@ -19,9 +19,7 @@ const Home = () => {
 
   if(data){
     console.log(data);
-    
   }
-
 
   return (
     <div className="px-[16px] bg-cover bg-no-repeat min-h-screen flex gap-[80px]">
@@ -36,3 +34,4 @@ const Home = () => {
 };
 
 export default Home;
+

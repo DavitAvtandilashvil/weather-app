@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import sunIcon from "../assets/icons/filled-sun.svg";
 import SingleDayWeatherComponent from "./SingleDayWeatherComponent";
 import ButtonComp from "./ButtonComp";
 import calendarIcon from "../assets/icons/calendar-icon.svg";
 import Calendar from "./Calendar";
+import useDailyWeather from "../hooks/useDailyWeather";
 
 const testArray = [
   {
@@ -58,6 +59,15 @@ const testArray = [
 ];
 
 const WeekWeatherWidget = () => {
+
+  const { data } = useDailyWeather()
+
+
+  if(data){
+
+    console.log(data);
+  }
+
   return (
     <div className="w-[492px] flex flex-col gap-[28px] items-center">
       {/* widget title and calendar */}
@@ -76,14 +86,14 @@ const WeekWeatherWidget = () => {
 
       {/* weather grid */}
       <div className="grid grid-cols-3 gap-[18px]">
-        {testArray.map((item, index) => {
+        {data?.timelines.daily.map((item, index) => {
           return (
             <SingleDayWeatherComponent
               key={index}
-              date={item.date}
-              dayName={item.dayName}
-              dayTemp={item.dayTemp}
-              nightTemp={item.nightTemp}
+              date={item.time}
+              dayName={item.time}
+              dayTemp={item.values.temperatureAvg}
+              nightTemp={item.values.temperatureMin}
               tempIcon={item.tempIcon}
             />
           );
