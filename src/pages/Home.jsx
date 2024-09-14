@@ -14,13 +14,13 @@ const Home = () => {
  }
 
  if(isError){
-  return <div className='text-[#FF0000] text-[30px]'>{error.message}</div>
+  return <div className='text-[#FF0000] text-[30px]'>{error.response.data.message}</div>
  }
 
- useEffect(()=>{
-  console.log(data);
-
- },[data])
+  if(data){
+    console.log(data);
+    
+  }
 
 
   return (
