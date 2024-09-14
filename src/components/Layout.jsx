@@ -10,13 +10,15 @@ const Layout = () => {
 
   return (
     <div
-      className="flex flex-col min-h-screen bg-cover bg-no-repeat"
+      className="flex flex-col min-h-screen bg-cover bg-no-repeat h-full"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <Header onLanguageChange={handleLanguageChange} />
-      <main className="flex-1 p-7">
-        <Outlet />
-      </main>
+      <div className="lg:max-w-[1440px] lg:mx-auto">
+        <Header onLanguageChange={handleLanguageChange} />
+        <main className="flex-1 p-7">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };
