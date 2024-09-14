@@ -32,13 +32,26 @@ body {
   height: 28px !important;
   opacity: 0;
   cursor: pointer;
+  overflow: hidden !important;
+}
+
+.react-datepicker-popper::-webkit-scrollbar.react-datepicker:-webkit-scrollbar,.custom-date-picker::-webkit-scrollbar{
+  display: none;
+  overflow: hidden !important;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.react-datepicker__triangle{
+  display: none;
 }
 
 .react-datepicker {
-  width: 492px !important;
+  width: 465px !important;
   height: 534px !important;
   right: 0 !important;
   position: absolute !important;
+  overflow: hidden !important;
 }
 
 .react-datepicker__day,
@@ -66,6 +79,11 @@ body {
   border-radius: 50%;
   background-color: black;
   color: white;
+}
+
+.react-datepicker__day-names{
+  display: flex;
+  justify-content: space-around;
 }
 
 /* დღის სახელი */
