@@ -18,3 +18,4 @@ const Home = ({city}) => {
 };
 
 export default Home;
+
