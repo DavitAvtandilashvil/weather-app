@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import backgroundImage from '../assets/images/backgrond.png';
 
-const Layout = () => {
+const Layout = ({ setCity }) => {
   const handleLanguageChange = () => {
     console.log('Language change function called');
   };
@@ -14,7 +14,7 @@ const Layout = () => {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="lg:max-w-[1440px] lg:mx-auto">
-        <Header onLanguageChange={handleLanguageChange} />
+        <Header setCity={setCity} onLanguageChange={handleLanguageChange} />
         <main className="flex-1 p-7">
           <Outlet />
         </main>

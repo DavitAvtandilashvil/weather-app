@@ -4,13 +4,20 @@ import { faGlobe, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { translations } from '../translations';
 import TemperatureToggle from './TemperatureConverter';
 
-const Header = () => {
+const Header = ({ setCity }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [language, setLanguage] = useState('en');
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    if (searchTerm.trim()) {
+      setCity(searchTerm.trim());
+      setSearchTerm(''); // ძიების შემდეგ ველის გასუფთავება
+    }
   };
 
   const handleLanguageChange = (lang) => {
@@ -31,6 +38,11 @@ const Header = () => {
           onChange={handleSearchChange}
           placeholder={translations[language].placeholder}
           className="w-[393px] h-[60px] pl-12 pr-4 rounded-[64px] bg-[#FF9500] text-white placeholder-black focus:outline-none focus:ring-0"
+          onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+              handleSearchSubmit(); // სეარჩი Enter-ზე
+            }
+          }}
         />
       </div>
       <div className="relative flex-shrink-0 pl-7">

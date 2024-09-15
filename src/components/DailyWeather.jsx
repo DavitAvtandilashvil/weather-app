@@ -1,40 +1,97 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import axios from 'axios';
 import Map from '../components/Map';
 
-const weatherData = {
-  city: 'თბილისი',
-  date: '14 სექტემბერი, ორშაბათი',
-  condition: 'მზიანი',
-  temperature: 31,
+const fetchWeather = async (city) => {
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const options = {
+    method: 'GET',
+    headers: { accept: 'application/json' },
+  };
+
+  const response = await axios.get(
+    `https://api.tomorrow.io/v4/weather/forecast?location=${city}&apikey=${apiKey}`,
+    options
+  );
+
+  if (response.status !== 200) {
+    throw new Error('Network response was not ok');
+  }
+
+  const data = response.data;
+  console.log(data);
+  return data;
 };
 
-const fetchMapData = async () => {
-  // API მოთხოვნა რუკის მონაცემების მისაღებად
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        center: { lat: 41.697102, lng: 44.773674 },
-        zoom: 12,
-      });
-    }, 1000);
-  });
-};
+const DailyWeather = ({ city }) => {
+  const [showLocation, setShowLocation] = useState(false);
 
-const DailyWeather = () => {
-  const { city, date, condition, temperature } = weatherData;
-  const [showMap, setShowMap] = useState(false);
+  const { data, isLoading, isError } = useQuery(
+    ['weatherData', city],
+    () => fetchWeather(city),
+    {
+      enabled: !!city,
+      staleTime: 300000,
+      cacheTime: 3600000,
+    }
+  );
 
-  const {
-    data: mapData,
-    isLoading,
-    isError,
-  } = useQuery('mapData', fetchMapData, {
-    enabled: showMap,
-  });
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error</p>;
+  }
+
+  // Getting date
+  const date = data?.timelines?.daily[0]?.time
+    ? new Date(data.timelines.daily[0].time).toLocaleDateString('ka-GE', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'There is no data';
+
+  // Getting weather conditions
+  const condition = data?.timelines?.hourly[0]?.values?.weatherCode
+    ? getWeatherCondition(data.timelines.hourly[0].values.weatherCode)
+    : 'There is no data';
+
+  // Getting the temperature
+  const temperature = data?.timelines?.hourly[0]?.values?.temperature
+    ? Math.round(data.timelines.hourly[0].values.temperature)
+    : 'N/A';
+
+  // Weather code description
+  function getWeatherCondition(code) {
+    const conditions = {
+      1000: 'მზიანი',
+      1001: 'ღრუბლიანი',
+      1100: 'ნაწილობრივ ღრუბლიანი',
+      1101: 'ნაწილობრივ ღრუბლიანი',
+      1102: 'ძალიან ღრუბლიანი',
+      2000: 'ნისლიანი',
+      4000: 'წვიმა',
+      5000: 'თოვლი',
+    };
+    return conditions[code] || 'Unknown condition';
+  }
+
+  // Display only the name of the city
+  const cityName = data?.location?.name.split(',')[0];
+
+  // Extract latitude and longitude for the map
+  const latitude = data?.location?.lat;
+  const longitude = data?.location?.lon;
+  const locationData = {
+    center: { lat: latitude, lon: longitude },
+  };
 
   const handleLocationClick = () => {
-    setShowMap(!showMap);
+    setShowLocation(!showLocation);
   };
 
   return (
@@ -45,7 +102,7 @@ const DailyWeather = () => {
       <div className="p-10 flex justify-between w-[756px] h-[206.79px] rounded-2xl bg-[#00000066] mb-2.5">
         <div className="flex flex-col gap-3">
           <h2 className="text-[40px] leading-[47.73px] font-medium text-white">
-            {city}
+            {cityName}
           </h2>
           <h3 className="text-2xl leading-[28.64px] text-white">{date}</h3>
         </div>
@@ -60,7 +117,7 @@ const DailyWeather = () => {
         </div>
       </div>
       <button
-        className="w-[245px] text-base leading-[19.09px] ml-3 mb-[50px] text-white 
+        className="w-[245px] text-base leading-[19.09px] ml-3 mb-[50px] text-white
                    transition-all duration-300 ease-in-out
                    hover:border-b hover:border-white
                    active:border-b active:border-white
@@ -69,15 +126,9 @@ const DailyWeather = () => {
       >
         ჩემი ახლანდელი მდებარეობა
       </button>
-      {showMap && (
+      {showLocation && (
         <div className="mt-4">
-          {isLoading ? (
-            <p>იტვირთება რუკა...</p>
-          ) : isError ? (
-            <p>შეცდომა რუკის ჩატვირთვისას</p>
-          ) : (
-            <Map center={mapData.center} zoom={mapData.zoom} />
-          )}
+          <Map center={locationData.center} />
         </div>
       )}
     </div>
